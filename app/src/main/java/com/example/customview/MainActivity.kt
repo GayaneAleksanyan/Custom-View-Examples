@@ -83,5 +83,36 @@ class CustomView @JvmOverloads constructor(context: Context, attributeSet: Attri
         canvas.drawCircle(width / 2f, height / 2f, 400f, strokePaint)
         canvas.drawTextOnPath("My Text", textPath, 0f, -30f, textPaint)
     }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        val colors = intArrayOf(
+            Color.YELLOW,
+            Color.BLUE,
+            Color.CYAN,
+            Color.MAGENTA,
+            Color.RED
+        )
+        val positions = floatArrayOf(
+            0.0f,
+            0.2f,
+            0.4f,
+            0.6f,
+            0.8f
+        )
+        circlePaint.shader = LinearGradient(
+            0f, 0f, 0f, h.toFloat(),
+            colors, positions, Shader.TileMode.MIRROR
+        )
+
+        paint.shader = LinearGradient(
+            0f, 0f, 0f, h.toFloat(),
+            Color.YELLOW, Color.RED, Shader.TileMode.MIRROR
+        )
+
+        trianglePaint.shader = RadialGradient(
+            w.toFloat() / 2, h.toFloat() / 2, 100f,
+            Color.YELLOW, Color.RED, Shader.TileMode.REPEAT
+        )
+    }
 }
 
